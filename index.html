@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CCD AIR | Vintage Camera Reimagined</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>CCD AIR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,14 +15,11 @@
         }
 
         :root {
-            --black: #0a0a0a;
+            --bg: #000000;
             --white: #ffffff;
-            --accent: #ff6b35;
-            --accent-secondary: #f7931e;
-            --gray-light: #f5f5f7;
-            --gray-medium: #86868b;
-            --gradient-warm: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            --gradient-dark: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%);
+            --accent: #e11d48;
+            --muted: #737373;
+            --border: rgba(255,255,255,0.08);
         }
 
         html {
@@ -28,23 +27,11 @@
         }
 
         body {
-            font-family: 'Outfit', -apple-system, sans-serif;
-            background: var(--black);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
             color: var(--white);
             overflow-x: hidden;
             line-height: 1.6;
-        }
-
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.15s ease-out, opacity 0.15s ease-out;
-            mix-blend-mode: difference;
         }
 
         nav {
@@ -53,1236 +40,1001 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 30px 80px;
+            padding: 32px 64px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        nav.scrolled {
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 20px 80px;
-            border-bottom: 1px solid rgba(255, 107, 53, 0.1);
         }
 
         .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--white);
-            letter-spacing: -1px;
+            font-family: 'Instrument Serif', serif;
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
             text-decoration: none;
-            background: var(--gradient-warm);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--white);
         }
 
         .nav-links {
             display: flex;
-            gap: 50px;
+            gap: 48px;
             list-style: none;
         }
 
         .nav-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
+            font-size: 13px;
             font-weight: 500;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            color: var(--muted);
             transition: color 0.3s ease;
-            position: relative;
         }
 
         .nav-links a:hover {
             color: var(--white);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-warm);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
         .nav-cta {
-            padding: 14px 32px;
-            background: var(--gradient-warm);
-            color: white;
-            border: none;
-            border-radius: 50px;
+            padding: 14px 36px;
+            border: 1.5px solid var(--white);
+            background: transparent;
+            color: var(--white);
+            font-size: 12px;
             font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+            transition: all 0.4s ease;
         }
 
         .nav-cta:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
+            background: var(--white);
+            color: var(--bg);
         }
 
-        .hero {
+        section.hero {
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            padding: 160px 64px 120px;
             position: relative;
-            overflow: hidden;
-            background: var(--black);
+            background: linear-gradient(135deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 100%),
+                        url('https://picsum.photos/2400/1600?random=1') center/cover no-repeat fixed;
         }
 
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-        }
-
-        .hero-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.25;
-            filter: grayscale(40%) contrast(1.1);
-        }
-
-        .hero-grid {
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(255, 107, 53, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 107, 53, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(60px, 60px); }
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            padding: 120px 80px;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 100px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 24px;
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 35px;
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-badge::before {
+        .hero::before {
             content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+        .hero-container {
+            max-width: 1440px;
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
 
-        .hero h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(3rem, 6vw, 5.5rem);
-            line-height: 1.05;
-            font-weight: 700;
-            letter-spacing: -2px;
-            margin-bottom: 30px;
+        .hero-text {
+            max-width: 640px;
+            position: relative;
+            z-index: 10;
         }
 
-        .hero h1 span {
-            background: var(--gradient-warm);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .hero-tag {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: 32px;
         }
 
-        .hero-text p {
-            font-size: 1.25rem;
+        .hero-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(64px, 12vw, 128px);
+            line-height: 0.95;
+            font-weight: 400;
+            letter-spacing: -4px;
+            margin-bottom: 36px;
+            text-shadow: 0 2px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-description {
+            font-size: 18px;
             line-height: 1.8;
-            color: rgba(255, 255, 255, 0.65);
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 48px;
             font-weight: 300;
-            margin-bottom: 45px;
-            max-width: 520px;
+            text-shadow: 0 1px 10px rgba(0,0,0,0.5);
         }
 
         .hero-buttons {
             display: flex;
-            gap: 18px;
+            gap: 24px;
             align-items: center;
         }
 
         .btn-primary {
-            padding: 20px 42px;
-            background: var(--gradient-warm);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-family: 'Space Grotesk', sans-serif;
+            padding: 20px 48px;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 13px;
             font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-            cursor: pointer;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.35);
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 48px rgba(255, 107, 53, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 25px 70px rgba(225, 29, 72, 0.35);
         }
 
         .btn-secondary {
-            padding: 20px 36px;
-            background: transparent;
-            color: var(--white);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 14px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.3s ease;
         }
 
         .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-3px);
+            color: var(--white);
         }
 
-        .hero-visual {
-            position: relative;
+        .btn-secondary svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            transition: transform 0.3s ease;
         }
 
-        .phone-container {
-            position: relative;
-            perspective: 1500px;
+        .btn-secondary:hover svg {
+            transform: translateX(6px);
         }
 
-        .phone-frame {
-            background: linear-gradient(145deg, #1c1c1e 0%, #000000 100%);
-            border-radius: 52px;
-            padding: 14px;
-            box-shadow: 
-                0 50px 100px rgba(0, 0, 0, 0.6),
-                0 0 0 1px rgba(255, 255, 255, 0.05),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-            transform: rotateY(-8deg) rotateX(5deg);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            animation: floatPhone 6s ease-in-out infinite;
-        }
-
-        @keyframes floatPhone {
-            0%, 100% { 
-                transform: rotateY(-8deg) rotateX(5deg) translateZ(0); 
-            }
-            50% { 
-                transform: rotateY(-8deg) rotateX(5deg) translateZ(-20px); 
-            }
-        }
-
-        .phone-frame img {
-            width: 100%;
-            aspect-ratio: 9/19.5;
-            object-fit: cover;
-            border-radius: 38px;
+        .hero-image {
             display: block;
+            position: relative;
         }
 
-        .phone-notch {
+        .hero-stats {
             position: absolute;
-            top: 28px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 110px;
-            height: 28px;
-            background: black;
-            border-radius: 20px;
-            z-index: 10;
+            top: 0;
+            right: 0;
+            width: 320px;
         }
 
-        .glow-ring {
-            position: absolute;
-            inset: -40px;
-            border-radius: 70px;
-            background: conic-gradient(from 0deg at 50% 50%, transparent, var(--accent), transparent, var(--accent-secondary), transparent);
-            filter: blur(40px);
-            opacity: 0.15;
-            z-index: -1;
-            animation: glowRotate 8s linear infinite;
-        }
-
-        @keyframes glowRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .floating-card {
-            position: absolute;
+        .stat-card {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 20px 26px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            animation: floatCard 4s ease-in-out infinite;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .floating-card.card-1 {
-            top: 15%;
-            right: -60px;
-            animation-delay: 0s;
-        }
-
-        .floating-card.card-2 {
-            bottom: 20%;
-            left: -80px;
-            animation-delay: 2s;
-        }
-
-        @keyframes floatCard {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .floating-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--gradient-warm);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-        }
-
-        .floating-text h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 3px;
-        }
-
-        .floating-text p {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .section {
-            padding: 160px 80px;
-            position: relative;
-        }
-
-        .section-label {
-            display: inline-block;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--accent);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 28px 32px;
             margin-bottom: 20px;
+            transition: all 0.4s ease;
         }
 
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            line-height: 1.15;
-            margin-bottom: 24px;
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(225, 29, 72, 0.15);
+            border-color: rgba(225, 29, 72, 0.3);
         }
 
-        .section-subtitle {
-            font-size: 1.15rem;
-            color: rgba(255, 255, 255, 0.55);
-            font-weight: 300;
-            max-width: 550px;
-            line-height: 1.75;
+        .stat-card-value {
+            font-family: 'Instrument Serif', serif;
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--accent);
+            margin-bottom: 8px;
         }
 
-        .features-section {
-            background: var(--black);
+        .stat-card-label {
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .features-header {
-            text-align: center;
-            margin-bottom: 90px;
+        .image-container {
+            width: 100%;
+            height: 420px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 30px;
-            max-width: 1300px;
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.05) brightness(0.97);
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .image-container:hover img {
+            transform: scale(1.04);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 48px;
+            left: 64px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .scroll-line {
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--muted));
+        }
+
+        .scroll-label {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+        }
+
+        /* Features */
+        section.features {
+            padding: 180px 64px;
+            border-top: 1px solid var(--border);
+        }
+
+        .features-wrapper {
+            max-width: 1440px;
             margin: 0 auto;
         }
 
+        .section-header {
+            margin-bottom: 96px;
+        }
+
+        .section-tag {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .section-heading {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.05;
+            font-weight: 400;
+            letter-spacing: -2px;
+            max-width: 700px;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
         .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 28px;
-            padding: 45px 38px;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-warm);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
+            background: var(--bg);
+            padding: 56px 44px;
+            transition: all 0.4s ease;
         }
 
         .feature-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 107, 53, 0.2);
-            transform: translateY(-8px);
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+            background: rgba(225, 29, 72, 0.03);
         }
 
-        .feature-number {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            background: var(--gradient-warm);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0.3;
-            margin-bottom: 20px;
-            line-height: 1;
-        }
-
-        .feature-icon-wrapper {
-            width: 68px;
-            height: 68px;
-            background: rgba(255, 107, 53, 0.1);
-            border-radius: 18px;
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(225, 29, 72, 0.15), rgba(225, 29, 72, 0.05));
+            border: 1px solid rgba(225, 29, 72, 0.2);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 28px;
-            font-size: 1.8rem;
+            margin-bottom: 24px;
+            transition: all 0.4s ease;
         }
 
-        .feature-card h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--accent);
+            stroke-width: 1.5;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(-5deg);
+            background: linear-gradient(135deg, rgba(225, 29, 72, 0.25), rgba(225, 29, 72, 0.1));
+            box-shadow: 0 8px 30px rgba(225, 29, 72, 0.2);
+        }
+
+        .feature-number {
+            font-family: 'Instrument Serif', serif;
+            font-size: 52px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.06);
+            margin-bottom: 28px;
+            line-height: 1;
+        }
+
+        .feature-name {
+            font-size: 22px;
             font-weight: 600;
             margin-bottom: 16px;
             letter-spacing: -0.5px;
         }
 
-        .feature-card p {
-            color: rgba(255, 255, 255, 0.5);
+        .feature-info {
+            font-size: 15px;
             line-height: 1.75;
-            font-size: 0.98rem;
+            color: var(--muted);
+            font-weight: 300;
         }
 
-        .showcase-section {
-            background: linear-gradient(180deg, var(--black) 0%, #111111 100%);
+        /* Gallery */
+        section.gallery {
+            padding: 0 64px 180px;
         }
 
-        .showcase-container {
-            max-width: 1500px;
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 1440px;
             margin: 0 auto;
         }
 
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 80px;
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
-        .showcase-main {
+        .gallery-item.tall {
             grid-row: span 2;
-            border-radius: 32px;
-            overflow: hidden;
-            position: relative;
-            aspect-ratio: 3/4;
         }
 
-        .showcase-main img {
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+
+        .gallery-image {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .showcase-main:hover img {
-            transform: scale(1.08);
-        }
-
-        .showcase-item {
-            border-radius: 32px;
-            overflow: hidden;
-            position: relative;
             aspect-ratio: 1;
-        }
-
-        .showcase-item img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            filter: saturate(0.85) contrast(1.1);
+            filter: brightness(0.95) contrast(1.08);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .showcase-item:hover img {
-            transform: scale(1.08);
+        .gallery-item.tall .gallery-image,
+        .gallery-item.wide .gallery-image {
+            aspect-ratio: auto;
+            height: 100%;
         }
 
-        .showcase-overlay {
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.06);
+            filter: brightness(1) contrast(1.02);
+        }
+
+        .gallery-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 60%);
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 65%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 35px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            padding: 36px;
         }
 
-        .showcase-main:hover .showcase-overlay,
-        .showcase-item:hover .showcase-overlay {
+        .gallery-item:hover .gallery-overlay {
             opacity: 1;
         }
 
-        .showcase-overlay h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.6rem;
+        .gallery-category {
+            font-size: 11px;
             font-weight: 600;
-            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 10px;
         }
 
-        .showcase-overlay p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.92rem;
+        .gallery-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 26px;
+            font-weight: 400;
         }
 
-        .filters-section {
-            background: #111111;
+        /* Stats */
+        section.stats {
+            padding: 140px 64px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
-        .filters-scroll {
-            display: flex;
-            gap: 32px;
-            overflow-x: auto;
-            padding: 40px 0 20px;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-        }
-
-        .filters-scroll::-webkit-scrollbar {
-            display: none;
-        }
-
-        .filter-card {
-            flex: 0 0 320px;
-            scroll-snap-align: start;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 28px;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .filter-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            border-color: rgba(255, 107, 53, 0.3);
-            box-shadow: 0 28px 72px rgba(0, 0, 0, 0.5);
-        }
-
-        .filter-image {
-            width: 100%;
-            aspect-ratio: 3/4;
-            overflow: hidden;
-        }
-
-        .filter-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease, filter 0.6s ease;
-        }
-
-        .filter-card:hover .filter-image img {
-            transform: scale(1.1);
-        }
-
-        .filter-card:nth-child(1):hover .filter-image img {
-            filter: sepia(0.7) contrast(1.25) brightness(0.88);
-        }
-
-        .filter-card:nth-child(2):hover .filter-image img {
-            filter: saturate(0.4) brightness(1.15) contrast(1.15);
-        }
-
-        .filter-card:nth-child(3):hover .filter-image img {
-            filter: grayscale(1) contrast(1.35) brightness(0.82);
-        }
-
-        .filter-card:nth-child(4):hover .filter-image img {
-            filter: hue-rotate(22deg) saturate(1.6) contrast(1.12);
-        }
-
-        .filter-card:nth-child(5):hover .filter-image img {
-            filter: contrast(1.45) brightness(0.88) saturate(0.65);
-        }
-
-        .filter-info {
-            padding: 28px;
-        }
-
-        .filter-info h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .filter-info p {
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 0.9rem;
-        }
-
-        .stats-bar {
-            background: rgba(255, 107, 53, 0.05);
-            border-top: 1px solid rgba(255, 107, 53, 0.1);
-            border-bottom: 1px solid rgba(255, 107, 53, 0.1);
-            padding: 80px;
-            margin-top: 100px;
-        }
-
-        .stats-grid {
+        .stats-row {
+            max-width: 1440px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 50px;
-            max-width: 1300px;
-            margin: 0 auto;
+            gap: 64px;
         }
 
-        .stat-item {
+        .stat-block {
             text-align: center;
         }
 
         .stat-value {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 4.5rem;
-            font-weight: 700;
-            background: var(--gradient-warm);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-family: 'Instrument Serif', serif;
+            font-size: 68px;
+            font-weight: 400;
             line-height: 1;
             margin-bottom: 12px;
         }
 
-        .stat-label {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: 400;
-            letter-spacing: 0.5px;
+        .stat-value span {
+            color: var(--accent);
         }
 
-        .cta-section {
-            background: var(--black);
+        .stat-name {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+        }
+
+        /* CTA */
+        section.cta {
+            padding: 200px 64px;
             text-align: center;
-            padding: 200px 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-bg-pattern {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 60%);
         }
 
         .cta-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
+            max-width: 720px;
             margin: 0 auto;
         }
 
-        .cta-content h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
+        .cta-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(46px, 7vw, 82px);
+            line-height: 1.05;
+            font-weight: 400;
+            letter-spacing: -2px;
             margin-bottom: 28px;
         }
 
-        .cta-content p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.55);
-            margin-bottom: 50px;
+        .cta-description {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--muted);
+            margin-bottom: 52px;
             font-weight: 300;
-            line-height: 1.7;
         }
 
-        .cta-btn {
-            padding: 22px 56px;
-            background: var(--gradient-warm);
-            color: white;
-            border: none;
-            border-radius: 16px;
-            font-family: 'Space Grotesk', sans-serif;
+        .cta-button {
+            display: inline-block;
+            padding: 22px 58px;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 13px;
             font-weight: 600;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-            cursor: pointer;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 14px;
-            box-shadow: 0 12px 48px rgba(255, 107, 53, 0.4);
+            transition: all 0.4s ease;
         }
 
-        .cta-btn:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 20px 64px rgba(255, 107, 53, 0.55);
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 80px rgba(225, 29, 72, 0.4);
         }
 
         footer {
-            background: #050505;
-            padding: 100px 80px 50px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 128px 64px 64px;
+            border-top: 1px solid var(--border);
         }
 
-        .footer-grid {
+        .footer-layout {
+            max-width: 1440px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
-            gap: 80px;
-            max-width: 1400px;
-            margin: 0 auto 80px;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr;
+            gap: 88px;
+            margin-bottom: 96px;
         }
 
-        .footer-brand h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            background: var(--gradient-warm);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .brand h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 26px;
+            font-weight: 400;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
         }
 
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.4);
+        .brand p {
+            font-size: 15px;
             line-height: 1.8;
-            font-size: 0.95rem;
+            color: var(--muted);
+            max-width: 320px;
+            font-weight: 300;
         }
 
-        .footer-col h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+        .footer-column h4 {
+            font-size: 11px;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 2px;
             margin-bottom: 28px;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--white);
         }
 
-        .footer-col ul {
+        .footer-column ul {
             list-style: none;
         }
 
-        .footer-col ul li {
-            margin-bottom: 16px;
+        .footer-column ul li {
+            margin-bottom: 14px;
         }
 
-        .footer-col ul li a {
-            color: rgba(255, 255, 255, 0.4);
+        .footer-column ul li a {
+            font-size: 15px;
+            color: var(--muted);
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
+            font-weight: 300;
         }
 
-        .footer-col ul li a:hover {
-            color: var(--accent);
-            transform: translateX(5px);
-            display: inline-block;
+        .footer-column ul li a:hover {
+            color: var(--white);
         }
 
-        .footer-bottom {
-            text-align: center;
+        .footer-bar {
+            max-width: 1440px;
+            margin: 0 auto;
             padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.88rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        @media (max-width: 1280px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 60px;
-                text-align: center;
+        .copyright {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .social-links a {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--white);
+        }
+
+        @media (max-width: 1366px) {
+            .hero-image {
+                width: 280px;
             }
 
-            .hero-text p {
-                margin-left: auto;
-                margin-right: auto;
+            .hero-stats {
+                width: 280px;
             }
 
-            .hero-buttons {
-                justify-content: center;
+            .stat-card-value {
+                font-size: 40px;
             }
 
-            .hero-visual {
-                max-width: 450px;
-                margin: 0 auto;
+            .image-container {
+                height: 360px;
             }
 
-            .floating-card {
-                display: none;
+            .features-list {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .stats-grid {
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-layout {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
             nav {
-                padding: 20px 40px;
-            }
-
-            nav.scrolled {
-                padding: 16px 40px;
+                padding: 24px 40px;
             }
 
             .nav-links {
                 display: none;
             }
 
-            .section {
-                padding: 100px 40px;
+            section.hero {
+                padding: 140px 40px 100px;
             }
 
-            .features-grid {
-                grid-template-columns: 1fr;
+            .hero-image {
+                display: none;
             }
 
-            .showcase-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .showcase-main {
-                grid-row: auto;
-            }
-
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 50px;
-            }
-
-            .stats-bar {
-                padding: 60px 40px;
-            }
-
-            .cta-section {
-                padding: 120px 40px;
-            }
-
+            section.features,
+            section.gallery,
+            section.stats,
+            section.cta,
             footer {
-                padding: 70px 40px 40px;
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item.tall,
+            .gallery-item.wide {
+                grid-row: auto;
+                grid-column: auto;
             }
         }
 
         @media (max-width: 640px) {
-            .hero-content {
-                padding: 100px 24px;
+            nav {
+                padding: 20px 24px;
             }
 
-            .section {
-                padding: 80px 24px;
+            section.hero {
+                padding: 130px 24px 90px;
             }
 
-            .stats-grid {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .scroll-hint {
+                display: none;
+            }
+
+            .features-list {
                 grid-template-columns: 1fr;
-                gap: 40px;
             }
 
-            .footer-grid {
+            .gallery-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bar {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <div class="cursor" id="cursor"></div>
 
-    <nav id="navbar">
-        <a href="#" class="logo">CCD AIR</a>
-        <ul class="nav-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#showcase">Showcase</a></li>
-            <li><a href="#filters">Filters</a></li>
-            <li><a href="#download">Download</a></li>
-        </ul>
-        <a href="#" class="nav-cta">Get App</a>
-    </nav>
+<nav>
+    <a href="#" class="logo">CCD AIR</a>
+    <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Download</a>
+</nav>
 
-    <section class="hero">
-        <div class="hero-bg">
-            <img src="https://picsum.photos/seed/ccdhero/1920/1080" alt="Background">
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-text">
+            <div class="hero-tag">Vintage Digital Camera App</div>
+            <h1 class="hero-title">Capture<br>Moments<br><em>Forever</em></h1>
+            <p class="hero-description">Experience authentic vintage photography with meticulously crafted filters and nostalgic aesthetics. Every shot feels like a memory.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">Download Now</a>
+                <a href="#features" class="btn-secondary">
+                    Explore Features
+                    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+            </div>
         </div>
-        <div class="hero-grid"></div>
         
-        <div class="hero-content">
-            <div class="hero-text">
-                <div class="hero-badge">Now Available on Android</div>
-                <h1>Redefine<br><span>Vintage</span><br>Photography</h1>
-                <p>Experience the authentic charm of CCD sensors with modern technology. Capture moments that feel like stepping back in time.</p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn-primary">
-                        Download Free
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                    </a>
-                    <a href="#features" class="btn-secondary">Explore Features</a>
+        <div class="hero-image">
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-card-value">50+</div>
+                    <div class="stat-card-label">Film Presets</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-value">2M+</div>
+                    <div class="stat-card-label">Downloads</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-value">4.9</div>
+                    <div class="stat-card-label">App Rating</div>
                 </div>
             </div>
-
-            <div class="hero-visual">
-                <div class="phone-container">
-                    <div class="glow-ring"></div>
-                    <div class="phone-frame">
-                        <div class="phone-notch"></div>
-                        <img src="https://picsum.photos/seed/phoneapp/600/1300" alt="App Preview">
-                    </div>
-                    
-                    <div class="floating-card card-1">
-                        <div class="floating-icon">&#127912;</div>
-                        <div class="floating-text">
-                            <h4>50+ Filters</h4>
-                            <p>Premium quality</p>
-                        </div>
-                    </div>
-
-                    <div class="floating-card card-2">
-                        <div class="floating-icon">&#11088;</div>
-                        <div class="floating-text">
-                            <h4>4.9 Rating</h4>
-                            <p>User reviews</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="image-container">
+                <img src="https://picsum.photos/1000/1200?random=2" alt="Mountain Forest Path" loading="eager">
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="section features-section" id="features">
-        <div class="features-header">
-            <span class="section-label">Features</span>
-            <h2 class="section-title">Built for<br>Creative Minds</h2>
-            <p class="section-subtitle" style="margin: 0 auto;">Powerful tools designed to bring your creative vision to life</p>
+    <div class="scroll-hint">
+        <div class="scroll-line"></div>
+        <span class="scroll-label">Scroll to explore</span>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <div class="features-wrapper">
+        <div class="section-header">
+            <div class="section-tag">Features</div>
+            <h2 class="section-heading">Everything you need for the perfect shot</h2>
         </div>
-
-        <div class="features-grid">
+        
+        <div class="features-list">
             <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                        <circle cx="12" cy="13" r="4"></circle>
+                    </svg>
+                </div>
                 <div class="feature-number">01</div>
-                <div class="feature-icon-wrapper">&#128247;</div>
-                <h3>Authentic CCD Sensor</h3>
-                <p>Realistic sensor simulation capturing the unique color science and noise characteristics of classic digital cameras from the golden era.</p>
+                <h3 class="feature-name">CCD Sensor Emulation</h3>
+                <p class="feature-info">Authentic CCD sensor simulation that captures the unique character and warmth of early digital cameras.</p>
             </div>
-
+            
             <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </div>
                 <div class="feature-number">02</div>
-                <div class="feature-icon-wrapper">&#127912;</div>
-                <h3>Film Emulation Engine</h3>
-                <p>Over 50 meticulously crafted film profiles including Kodak Portra, Fuji Provia, and iconic CCD camera looks from the early 2000s.</p>
+                <h3 class="feature-name">Film Presets</h3>
+                <p class="feature-info">50+ meticulously crafted film presets from iconic cameras and legendary film stocks worldwide.</p>
             </div>
-
+            
             <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </div>
                 <div class="feature-number">03</div>
-                <div class="feature-icon-wrapper">&#9729;</div>
-                <h3>Natural Light Leaks</h3>
-                <p>Organic light leak effects that add dreamy, nostalgic atmosphere to your photos. Each leak is procedurally generated for uniqueness.</p>
+                <h3 class="feature-name">Light Leaks</h3>
+                <p class="feature-info">Organic light leak effects that add dreamy, nostalgic atmosphere to your photos.</p>
             </div>
-
+            
             <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </div>
                 <div class="feature-number">04</div>
-                <div class="feature-icon-wrapper">&#128190;</div>
-                <h3>Vintage Date Stamp</h3>
-                <p>Classic orange date stamp overlay that instantly transports your photos back to the early digital camera era. Fully customizable.</p>
+                <h3 class="feature-name">Date Stamp</h3>
+                <p class="feature-info">Classic orange date stamp that brings back memories of early digital camera aesthetics.</p>
             </div>
-
+            
             <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                    </svg>
+                </div>
                 <div class="feature-number">05</div>
-                <div class="feature-icon-wrapper">&#128250;</div>
-                <h3>Video Mode</h3>
-                <p>Record videos with vintage CCD characteristics including authentic noise patterns, color grading, and frame-by-frame processing.</p>
+                <h3 class="feature-name">Video Mode</h3>
+                <p class="feature-info">Record videos with vintage CCD aesthetics and authentic frame-by-frame processing.</p>
             </div>
-
+            
             <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"></path>
+                        <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
                 <div class="feature-number">06</div>
-                <div class="feature-icon-wrapper">&#128161;</div>
-                <h3>Smart Flash System</h3>
-                <p>AI-powered flash simulation with natural vignette and overexposure effects typical of compact cameras from the 2000s.</p>
+                <h3 class="feature-name">Flash Effects</h3>
+                <p class="feature-info">Simulated on-camera flash with natural vignette and overexposure effects.</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section showcase-section" id="showcase">
-        <div class="showcase-container">
-            <span class="section-label">Gallery</span>
-            <h2 class="section-title">Shot on CCD AIR</h2>
-            <p class="section-subtitle">Real photos captured by our community using CCD AIR</p>
-
-            <div class="showcase-grid">
-                <div class="showcase-main">
-                    <img src="https://picsum.photos/seed/gallerymain/800/1067" alt="Main Gallery">
-                    <div class="showcase-overlay">
-                        <h3>Urban Stories</h3>
-                        <p>Captured in Tokyo</p>
-                    </div>
-                </div>
-
-                <div class="showcase-item">
-                    <img src="https://picsum.photos/seed/gal01/800/800" alt="Gallery 1">
-                    <div class="showcase-overlay">
-                        <h3>Golden Hour</h3>
-                        <p>Sunset vibes</p>
-                    </div>
-                </div>
-
-                <div class="showcase-item">
-                    <img src="https://picsum.photos/seed/gal02/800/800" alt="Gallery 2">
-                    <div class="showcase-overlay">
-                        <h3>Portrait Mode</h3>
-                        <p>Warm tones</p>
-                    </div>
-                </div>
+<section class="gallery" id="gallery">
+    <div class="gallery-grid">
+        <div class="gallery-item tall">
+            <img class="gallery-image" src="https://picsum.photos/1000/1600?random=3" alt="Foggy Mountain Valley" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-category">Landscape</span>
+                <h3 class="gallery-title">Misty Morning</h3>
             </div>
         </div>
-    </section>
-
-    <section class="section filters-section" id="filters">
-        <div style="text-align: center;">
-            <span class="section-label">Filters</span>
-            <h2 class="section-title">Signature Looks</h2>
-            <p class="section-subtitle" style="margin: 0 auto;">Each filter is crafted from real vintage cameras</p>
-        </div>
-
-        <div class="filters-scroll">
-            <div class="filter-card">
-                <div class="filter-image">
-                    <img src="https://picsum.photos/seed/filtsepia/480/640" alt="Sepia">
-                </div>
-                <div class="filter-info">
-                    <h4>Classic Sepia</h4>
-                    <p>Timeless warm vintage tones</p>
-                </div>
-            </div>
-
-            <div class="filter-card">
-                <div class="filter-image">
-                    <img src="https://picsum.photos/seed/filtfade/480/640" alt="Faded">
-                </div>
-                <div class="filter-info">
-                    <h4>Faded Memory</h4>
-                    <p>Soft muted dreamy colors</p>
-                </div>
-            </div>
-
-            <div class="filter-card">
-                <div class="filter-image">
-                    <img src="https://picsum.photos/seed/filtbw/480/640" alt="B&W">
-                </div>
-                <div class="filter-info">
-                    <h4>Mono Chrome</h4>
-                    <p>Elegant black & white</p>
-                </div>
-            </div>
-
-            <div class="filter-card">
-                <div class="filter-image">
-                    <img src="https://picsum.photos/seed/filtwarm/480/640" alt="Warm">
-                </div>
-                <div class="filter-info">
-                    <h4>Golden Hour</h4>
-                    <p>Rich sunset warmth</p>
-                </div>
-            </div>
-
-            <div class="filter-card">
-                <div class="filter-image">
-                    <img src="https://picsum.photos/seed/filtmoody/480/640" alt="Moody">
-                </div>
-                <div class="filter-info">
-                    <h4>Moody Film</h4>
-                    <p>Deep atmospheric look</p>
-                </div>
+        
+        <div class="gallery-item wide">
+            <img class="gallery-image" src="https://picsum.photos/1600/900?random=4" alt="Coastal Road" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-category">Coastal</span>
+                <h3 class="gallery-title">Ocean Drive</h3>
             </div>
         </div>
-
-        <div class="stats-bar">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-value">50+</div>
-                    <div class="stat-label">Film Filters</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">2M+</div>
-                    <div class="stat-label">Downloads</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">4.9</div>
-                    <div class="stat-label">App Rating</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">100K</div>
-                    <div class="stat-label">Daily Users</div>
-                </div>
+        
+        <div class="gallery-item">
+            <img class="gallery-image" src="https://picsum.photos/1000/1000?random=5" alt="Desert Sand Dunes" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-category">Desert</span>
+                <h3 class="gallery-title">Golden Sands</h3>
             </div>
         </div>
-    </section>
-
-    <section class="cta-section" id="download">
-        <div class="cta-bg-pattern"></div>
-        <div class="cta-content">
-            <h2>Ready to Create<br><span style="background: var(--gradient-warm); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Vintage Magic?</span></h2>
-            <p>Join millions of photographers who are rediscovering the beauty of classic photography with CCD AIR.</p>
-            <a href="#" class="cta-btn">
-                Download for Android
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            </a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h3>CCD AIR</h3>
-                <p>The ultimate vintage camera experience for Android. Capture moments with soul and authenticity.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Filters</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Updates</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Community</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Connect</h4>
-                <ul>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Twitter/X</a></li>
-                    <li><a href="#">小红书</a></li>
-                    <li><a href="#">Bilibili</a></li>
-                </ul>
+        
+        <div class="gallery-item">
+            <img class="gallery-image" src="https://picsum.photos/1000/1000?random=6" alt="City Night Skyline" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-category">Urban</span>
+                <h3 class="gallery-title">City Lights</h3>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 CCD AIR. All rights reserved. Crafted with passion for photography.</p>
+        
+        <div class="gallery-item">
+            <img class="gallery-image" src="https://picsum.photos/1000/1000?random=7" alt="Forest Path" loading="lazy">
+            <div class="gallery-overlay">
+                <span class="gallery-category">Nature</span>
+                <h3 class="gallery-title">Forest Trail</h3>
+            </div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <script>
-        const cursor = document.getElementById('cursor');
-        const navbar = document.getElementById('navbar');
+<section class="stats">
+    <div class="stats-row">
+        <div class="stat-block">
+            <div class="stat-value">50<span>+</span></div>
+            <div class="stat-name">Film Presets</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-value">2<span>M+</span></div>
+            <div class="stat-name">Downloads</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-value">4<span>.9</span></div>
+            <div class="stat-name">App Rating</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-value">100<span>K+</span></div>
+            <div class="stat-name">Daily Users</div>
+        </div>
+    </div>
+</section>
 
-        if (window.matchMedia('(pointer: fine)').matches) {
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
+<section class="cta" id="about">
+    <div class="cta-content">
+        <h2 class="cta-title">Ready to create timeless memories?</h2>
+        <p class="cta-description">Join thousands of photographers rediscovering vintage digital photography. Download CCD AIR and start your journey today.</p>
+        <a href="#" class="cta-button">Download for Free</a>
+    </div>
+</section>
 
-            document.querySelectorAll('a, button').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'scale(2)';
-                    cursor.style.opacity = '0.6';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'scale(1)';
-                    cursor.style.opacity = '1';
-                });
-            });
-        } else {
-            cursor.style.display = 'none';
-        }
+<footer>
+    <div class="footer-layout">
+        <div class="brand">
+            <h3>CCD AIR</h3>
+            <p>Redefining mobile photography through authentic vintage aesthetics. Capture moments with soul and character.</p>
+        </div>
+        
+        <div class="footer-column">
+            <h4>Product</h4>
+            <ul>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Filters</a></li>
+                <li><a href="#">Updates</a></li>
+                <li><a href="#">Roadmap</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Licensing</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-bar">
+        <p class="copyright">&copy; 2026 CCD AIR. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+            <a href="#">TikTok</a>
+        </div>
+    </div>
+</footer>
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-    </script>
 </body>
 </html>
